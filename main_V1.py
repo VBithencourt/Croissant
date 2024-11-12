@@ -1,7 +1,6 @@
 import pygame
 from mapa_F1 import mapa_1
 from tela_inicial import mostrar_tela_inicial
-#posicionamento cartesiano é sempre para baixa. ou seja, x aumenta pra direita e o y aumenta para baixo.
 
 pygame.init()
 
