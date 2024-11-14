@@ -16,7 +16,7 @@ def mostrar_tutorial(janela):
         "Pressione 'T' para voltar ao jogo."
     ]
     
-    fonte_personalizada = pygame.font.Font("Coisinhas/Fonte2.ttf", 170)
+    fonte_personalizada = pygame.font.Font("Coisinhas/Fontejogo.ttf", 170)
 
     y_offset = 170
     

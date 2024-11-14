@@ -4,9 +4,13 @@ from tela_inicial import mostrar_tela_inicial
 from tela_tutorial import mostrar_tutorial
 
 pygame.init()
+pygame.mixer.init()
 
 janela = pygame.display.set_mode((1400,800))
 pygame.display.set_caption('Insper challengers: Em busca do croissant de chocolate.')
+
+pygame.mixer.music.load('Coisinhas/soundtrack.mpeg') 
+pygame.mixer.music.play(-1) 
 
 con = pygame.image.load('Coisinhas/concreto.png').convert()
 Va1 = pygame.image.load('Coisinhas/Vines-acid.png').convert()

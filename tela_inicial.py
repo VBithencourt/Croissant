@@ -1,6 +1,6 @@
 import pygame
 pygame.font.init()
-fonte_personalizada = pygame.font.Font("Coisinhas/Fonte2.ttf", 190)
+fonte_personalizada = pygame.font.Font("Coisinhas/Fontejogo.ttf", 190)
 imagem_fundo = pygame.image.load("Coisinhas/Fundo2.jpeg")
 
 def mostrar_tela_inicial(janela):
