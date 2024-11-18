@@ -5,6 +5,7 @@ from tela_tutorial import mostrar_tutorial
 from musica import *
 from player import *
 from player2 import *
+from tela_final_ import *
 
 mostrar_tela_inicial(janela)
 
@@ -12,9 +13,13 @@ tutorial_ativo = False
 jogo = True
 som_tocado = False
 game_over = False
+tela_final = False
 
 mortes_player = 0
 mortes_player2 = 0
+
+player_chegou_no_4 = False
+player2_chegou_no_4 = False
 
 font_score = pygame.font.Font(None, 36)
 
@@ -33,6 +38,8 @@ while jogo:
                 player2 = Player2(50, 700, 20, 20)  # Cria o player2 na posição inicial
                 game_over = False
                 som_tocado = False  # Reinicia o som
+                player_chegou_no_4 = False  # Reinicia o status de chegada
+                player2_chegou_no_4 = False  # Reinicia o status de chegada
                 tocar_efeito_sonoro()  # Toca o som novamente
 
         if event.type == pygame.USEREVENT:
@@ -43,6 +50,19 @@ while jogo:
         font = pygame.font.Font(None, 74)
         texto = font.render("GAME OVER", True, (255, 0, 0))
         janela.blit(texto, (500, 300))
+
+        texto_mortes_player = font_score.render(f'Mortes Player 1: {mortes_player}', True, (0, 0, 0))
+        texto_mortes_player2 = font_score.render(f'Mortes Player 2: {mortes_player2}', True, (0, 0, 0))
+        janela.blit(texto_mortes_player, (500, 480))
+        janela.blit(texto_mortes_player2, (500, 500))
+
+        font_button = pygame.font.Font(None, 36)
+        button = font_button.render("Pressione R para Reiniciar", True, (0, 0, 0))
+        janela.blit(button, (500, 400))
+    elif tela_final:
+        # Mostra a tela final e espera o jogador pressionar "Esc" para sair
+        if mostrar_final(janela):
+            jogo = False  # Encerra o jogo se "Esc" for pressionado
 
         texto_mortes_player = font_score.render(f'Mortes Player 1: {mortes_player}', True, (0, 0, 0))
         texto_mortes_player2 = font_score.render(f'Mortes Player 2: {mortes_player2}', True, (0, 0, 0))
@@ -97,6 +117,10 @@ while jogo:
 
             if mapa_1[player_pos[1]][player_pos[0]] == 3 or mapa_1[player2_pos[1]][player2_pos[0]] == 3:
                 game_over = True  # Acabou o jogo, um dos jogadores pisou no tile 3
+            
+            if mapa_1[player_pos[1]][player_pos[0]] == 4 or mapa_1[player2_pos[1]][player2_pos[0]] == 4:
+                tela_final = True  # Vai para a tela final do jogo
+            
              
 
     pygame.display.update()
