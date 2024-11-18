@@ -58,12 +58,12 @@ class Player2:
     def movimentacao(self, dx, dy):
         # Movimentação horizontal
         self.rect.x += dx
-        if self.checa_colisao():
+        if self.checa_colisao2():
             self.rect.x -= dx  # Reverte o movimento se houver colisão
 
         # Movimentação vertical
         self.rect.y += dy
-        if self.checa_colisao():
+        if self.checa_colisao2():
             self.rect.y -= dy  # Reverte o movimento se houver colisão
             if dy > 0:  # Se o personagem estava caindo
                 self.on_ground = True
@@ -77,7 +77,7 @@ class Player2:
         self.rect.y += self.velocity_y
 
         # Verificando colisão com o chão
-        if self.checa_colisao() or self.checa_colisao2():
+        if self.checa_colisao2():
             self.rect.y -= self.velocity_y  # Reverte o movimento vertical
             self.velocity_y = 0
             self.on_ground = True  # O personagem está tocando o chão
@@ -101,15 +101,6 @@ class Player2:
     def draw(self, janela):
         janela.blit(self.image, (self.rect.x, self.rect.y - self.image.get_height() + self.rect.height))
 
-    def checa_colisao(self):
-        # Verificando colisões com os blocos sólidos no mapa
-        for linha in range(len(mapa_1)):
-            for coluna in range(len(mapa_1[linha])):
-                if mapa_1[linha][coluna] == 1:  # Blocos sólidos (terreno)
-                    bloco = pygame.Rect(coluna * largura_tile, linha * altura_tile, largura_tile, altura_tile)
-                    if self.rect.colliderect(bloco):
-                        return True
-        return False
 
     def checa_colisao2(self):
         # Verificando colisões com os blocos sólidos no mapa
