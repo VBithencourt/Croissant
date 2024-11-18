@@ -18,6 +18,9 @@ mortes_player2 = 0
 
 font_score = pygame.font.Font(None, 36)
 
+def avancar_de_mapa():
+    print("Avançando de mapa!")
+
 while jogo:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -54,6 +57,7 @@ while jogo:
         font_button = pygame.font.Font(None, 36)
         button = font_button.render("Pressione R para Reiniciar", True, (0, 0, 0))
         janela.blit(button, (500, 500))
+
     else:
         # Jogo em andamento
         player.handle_input()
@@ -97,6 +101,10 @@ while jogo:
 
             if mapa_1[player_pos[1]][player_pos[0]] == 3 or mapa_1[player2_pos[1]][player2_pos[0]] == 3:
                 game_over = True  # Acabou o jogo, um dos jogadores pisou no tile 3
+
+            if (mapa_1[player_pos[1]][player_pos[0]] == 4 and 
+                mapa_1[player2_pos[1]][player2_pos[0]] == 4):
+                avancar_de_mapa()  # Chama a função para avançar de mapa
              
 
     pygame.display.update()
