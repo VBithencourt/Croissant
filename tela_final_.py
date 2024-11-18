@@ -3,18 +3,24 @@ pygame.font.init()
 imagem_fundodf = pygame.image.load("Coisinhas/Final_Croissant.jpeg")
 
 def mostrar_final(janela):
-    # Mostra a tela final
-    janela.blit(imagem_fundodf, (0, 0))
+    # Obtém as dimensões da janela
+    largura_janela, altura_janela = janela.get_size()
+
+    # Redimensiona a imagem de fundo para ocupar toda a tela
+    imagem_fundodf_redimensionada = pygame.transform.scale(imagem_fundodf, (largura_janela, altura_janela))
+
+    # Mostra a imagem de fundo redimensionada
+    janela.blit(imagem_fundodf_redimensionada, (0, 0))
     
     texto = [
         "PARABÉNS!",
-        "Você subiu todo o P2 e",
+        "Tu acaba de subir todo o P2 e",
         "conquistou seu croissant de chocolate.",
         "Pressione 'Esc' para encerrar sua jornada."
     ]
     
-    fonte_personalizada = pygame.font.Font("Coisinhas/Fontejogo.ttf", 170)
-    y_offset = 170
+    fonte_personalizada = pygame.font.Font("Coisinhas/Fontejogo.ttf", 150)
+    y_offset = 100
     
     # Renderiza o texto na tela
     for linha in texto:

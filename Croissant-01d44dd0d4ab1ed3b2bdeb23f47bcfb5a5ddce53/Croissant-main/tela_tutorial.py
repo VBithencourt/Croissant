@@ -11,7 +11,7 @@ def mostrar_tutorial(janela):
         "2. Pressione seta para cima ou 'W' para pular.",
         "3. Evite os obstáculos.",
         "4. O objetivo é chegar ao final do mapa e",
-        "subir o elevador para a próxima fase.",
+        "entrar na porta para a próxima fase.",
         "",
         "Pressione 'T' para voltar ao jogo."
     ]

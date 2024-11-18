@@ -1,21 +1,11 @@
-
 import pygame
-from mapa_F1 import mapa_1
+from mapa_F1 import *
 from tela_inicial import mostrar_tela_inicial
 from tela_tutorial import mostrar_tutorial
 from musica import *
 from player import *
 from player2 import *
 from tela_final_ import *
-
-con = pygame.image.load('Coisinhas/pedragrama.jpg').convert()
-Va1 = pygame.image.load('Coisinhas/cid.jpg').convert()
-grama = pygame.image.load('Coisinhas/grama.png').convert()
-P_lisa = pygame.image.load('Coisinhas/Fundoazul.jpg').convert()
-P1 = pygame.image.load('Coisinhas/p1.png').convert()
-P2 = pygame.image.load('Coisinhas/p2.png').convert()
-P3 = pygame.image.load('Coisinhas/p5.png').convert()
-P4 = pygame.image.load('Coisinhas/p4.png').convert()
 
 mostrar_tela_inicial(janela)
 
@@ -31,11 +21,14 @@ mortes_player2 = 0
 player_chegou_no_4 = False
 player2_chegou_no_4 = False
 
-font_score = pygame.font.Font(None, 36)
 
 font_score = pygame.font.Font(None, 36)
-x_inicial = 20
-y_inicial = 700
+x_inicial = 1300 
+y_inicial =700
+
+# player = Player(x_inicial, y_inicial, 20, 20)  # Use as variáveis x_inicial e y_inicial
+# player2 = Player2(x_inicial + 20, y_inicial, 20, 20)  # Para player2, use o x_inicial + 20
+
 player = Player(x_inicial, y_inicial, 20, 20)
 player2 = Player2(x_inicial, y_inicial, 20, 20)
 while jogo:
@@ -48,9 +41,9 @@ while jogo:
                 tocar_efeito_sonoro()
             if event.key == pygame.K_r and game_over:  # Reinicia o jogo
                 # Restaura o mapa e a posição dos jogadores
-                mapa_1 = [linha[:] for linha in mapa_1]  # Restaura o mapa
-                player = Player(20, 700, 20, 20)  # Cria o player na posição inicial
-                player2 = Player2(50, 700, 20, 20)  # Cria o player2 na posição inicial
+                mapa_2 = [linha[:] for linha in mapa_2]  # Restaura o mapa
+                player = Player(800, 30, 20, 20)  # Cria o player na posição inicial
+                player2 = Player2(820, 30, 20, 20)  # Cria o player2 na posição inicial
                 game_over = False
                 som_tocado = False  # Reinicia o som
                 player_chegou_no_4 = False  # Reinicia o status de chegada
@@ -104,24 +97,16 @@ while jogo:
             if not som_tocado:
                 tocar_efeito_sonoro()
                 som_tocado = True
-            for linha in range(len(mapa_1)):
-                for coluna in range(len(mapa_1[linha])):
+            for linha in range(len(mapa_2)):
+                for coluna in range(len(mapa_2[linha])):
                     x = coluna * largura_tile
                     y = linha * altura_tile
-                    if mapa_1[linha][coluna] == 1:
+                    if mapa_2[linha][coluna] == 1:
                         janela.blit(con, (x, y))
-                    elif mapa_1[linha][coluna] == 0:
+                    elif mapa_2[linha][coluna] == 0:
                         janela.blit(P_lisa, (x, y))
-                    elif mapa_1[linha][coluna] == 3:
-                        janela.blit(Va1, (x, y))
-                    elif mapa_1[linha][coluna] == 'p1':
-                        janela.blit(P1, (x, y))
-                    elif mapa_1[linha][coluna] == 'p2':
-                        janela.blit(P2, (x, y))
-                    elif mapa_1[linha][coluna] == 'p3':
-                        janela.blit(P3, (x, y))
-                    elif mapa_1[linha][coluna] == 'p4':
-                        janela.blit(P4, (x, y))
+                    elif mapa_2[linha][coluna] == 2:
+                        janela.blit(grama, (x, y))
 
             player.draw(janela)
             player2.draw(janela)
@@ -130,50 +115,20 @@ while jogo:
             player_pos = (player.rect.x // largura_tile, player.rect.y // altura_tile)
             player2_pos = (player2.rect.x // largura_tile, player2.rect.y // altura_tile)
 
-            if mapa_1[player_pos[1]][player_pos[0]] == 3:
+            if mapa_2[player_pos[1]][player_pos[0]] == 3:
                 game_over = True  # Acabou o jogo, o player pisou no tile 3
                 mortes_player += 1  # Incrementa a morte do player
 
-            if mapa_1[player2_pos[1]][player2_pos[0]] == 3:
+            if mapa_2[player2_pos[1]][player2_pos[0]] == 3:
                 game_over = True  # Acabou o jogo, o player2 pisou no tile 3
                 mortes_player2 += 1  # Incrementa a morte do player2
 
-            if mapa_1[player_pos[1]][player_pos[0]] == 3 or mapa_1[player2_pos[1]][player2_pos[0]] == 3:
+            if mapa_2[player_pos[1]][player_pos[0]] == 3 or mapa_2[player2_pos[1]][player2_pos[0]] == 3:
                 game_over = True  # Acabou o jogo, um dos jogadores pisou no tile 3
             
-            if mapa_1[player_pos[1]][player_pos[0]] == 'p1' and mapa_1[player2_pos[1]][player2_pos[0]] == 'p1':
-                mapa_1 = mapa_2
-                if mapa_2[player_pos[1]][player_pos[0]] == 3:
-                    game_over = True  # Acabou o jogo, o player pisou no tile 3
-                    mortes_player += 1  # Incrementa a morte do player
-
-                if mapa_2[player2_pos[1]][player2_pos[0]] == 3:
-                    game_over = True  # Acabou o jogo, o player2 pisou no tile 3
-                    mortes_player2 += 1  # Incrementa a morte do player2
-
-                if mapa_2[player_pos[1]][player_pos[0]] == 3 or mapa_2[player2_pos[1]][player2_pos[0]] == 3:
-                    game_over = True  # Acabou o jogo, um dos jogadores pisou no tile 3
-            
-                if mapa_2[player_pos[1]][player_pos[0]] == 'p1' and mapa_2[player2_pos[1]][player2_pos[0]] == 'p1':
-                    mapa_2 = mapa_3
-                    if mapa_3[player_pos[1]][player_pos[0]] == 3:
-                        game_over = True  # Acabou o jogo, o player pisou no tile 3
-                        mortes_player += 1  # Incrementa a morte do player
-
-                    if mapa_3[player2_pos[1]][player2_pos[0]] == 3:
-                        game_over = True  # Acabou o jogo, o player2 pisou no tile 3
-                        mortes_player2 += 1  # Incrementa a morte do player2
-
-                    if mapa_3[player_pos[1]][player_pos[0]] == 3 or mapa_3[player2_pos[1]][player2_pos[0]] == 3:
-                        game_over = True  # Acabou o jogo, um dos jogadores pisou no tile 3
-            
-                    if mapa_3[player_pos[1]][player_pos[0]] == 'p1' and mapa_3[player2_pos[1]][player2_pos[0]] == 'p1':
-                        tela_final = True  # Vai para a tela final do jogo
-            
-            if mapa_1[player_pos[1]][player_pos[0]] == 4 or mapa_1[player2_pos[1]][player2_pos[0]] == 4:
+            if mapa_2[player_pos[1]][player_pos[0]] == 4 or mapa_2[player2_pos[1]][player2_pos[0]] == 4:
                 tela_final = True  # Vai para a tela final do jogo
             
-
              
 
     pygame.display.update()
