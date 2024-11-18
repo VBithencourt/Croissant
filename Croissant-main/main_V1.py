@@ -6,23 +6,17 @@ from musica import *
 from player import *
 from player2 import *
 
-pygame.init()
-
-janela = pygame.display.set_mode((1400, 800))
-pygame.display.set_caption('Insper challengers: Em busca do croissant de chocolate.')
-
-# Carregar imagens
-con = pygame.image.load('Coisinhas/concreto.png').convert()
-Va1 = pygame.image.load('Coisinhas/Vines-acid.png').convert()
-grama = pygame.image.load('Coisinhas\grama.png').convert()
-P_lisa = pygame.image.load('Coisinhas\ParedeLisa.png').convert()
-
 mostrar_tela_inicial(janela)
 
 tutorial_ativo = False
 jogo = True
 som_tocado = False
 game_over = False
+
+mortes_player = 0
+mortes_player2 = 0
+
+font_score = pygame.font.Font(None, 36)
 
 while jogo:
     for event in pygame.event.get():
@@ -50,10 +44,16 @@ while jogo:
         texto = font.render("GAME OVER", True, (255, 0, 0))
         janela.blit(texto, (500, 300))
 
+        texto_mortes_player = font_score.render(f'Mortes Player: {mortes_player}', True, (0, 0, 0))
+        texto_mortes_player2 = font_score.render(f'Mortes Player 2: {mortes_player2}', True, (0, 0, 0))
+        janela.blit(texto_mortes_player, (500, 400))
+        janela.blit(texto_mortes_player2, (500, 440))
+
+
         # Botão para reiniciar
         font_button = pygame.font.Font(None, 36)
         button = font_button.render("Pressione R para Reiniciar", True, (0, 0, 0))
-        janela.blit(button, (500, 400))
+        janela.blit(button, (500, 500))
     else:
         # Jogo em andamento
         player.handle_input()
@@ -87,8 +87,17 @@ while jogo:
             player_pos = (player.rect.x // largura_tile, player.rect.y // altura_tile)
             player2_pos = (player2.rect.x // largura_tile, player2.rect.y // altura_tile)
 
+            if mapa_1[player_pos[1]][player_pos[0]] == 3:
+                game_over = True  # Acabou o jogo, o player pisou no tile 3
+                mortes_player += 1  # Incrementa a morte do player
+
+            if mapa_1[player2_pos[1]][player2_pos[0]] == 3:
+                game_over = True  # Acabou o jogo, o player2 pisou no tile 3
+                mortes_player2 += 1  # Incrementa a morte do player2
+
             if mapa_1[player_pos[1]][player_pos[0]] == 3 or mapa_1[player2_pos[1]][player2_pos[0]] == 3:
                 game_over = True  # Acabou o jogo, um dos jogadores pisou no tile 3
+             
 
     pygame.display.update()
 
