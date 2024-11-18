@@ -21,8 +21,16 @@ mortes_player2 = 0
 player_chegou_no_4 = False
 player2_chegou_no_4 = False
 
-font_score = pygame.font.Font(None, 36)
 
+font_score = pygame.font.Font(None, 36)
+x_inicial = 1300 
+y_inicial =700
+
+# player = Player(x_inicial, y_inicial, 20, 20)  # Use as variáveis x_inicial e y_inicial
+# player2 = Player2(x_inicial + 20, y_inicial, 20, 20)  # Para player2, use o x_inicial + 20
+
+player = Player(x_inicial, y_inicial, 20, 20)
+player2 = Player2(x_inicial, y_inicial, 20, 20)
 while jogo:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -34,8 +42,8 @@ while jogo:
             if event.key == pygame.K_r and game_over:  # Reinicia o jogo
                 # Restaura o mapa e a posição dos jogadores
                 mapa_2 = [linha[:] for linha in mapa_2]  # Restaura o mapa
-                player = Player(20, 700, 20, 20)  # Cria o player na posição inicial
-                player2 = Player2(50, 700, 20, 20)  # Cria o player2 na posição inicial
+                player = Player(800, 30, 20, 20)  # Cria o player na posição inicial
+                player2 = Player2(820, 30, 20, 20)  # Cria o player2 na posição inicial
                 game_over = False
                 som_tocado = False  # Reinicia o som
                 player_chegou_no_4 = False  # Reinicia o status de chegada

@@ -22,7 +22,10 @@ player_chegou_no_4 = False
 player2_chegou_no_4 = False
 
 font_score = pygame.font.Font(None, 36)
-
+x_inicial = 20
+y_inicial = 700
+player = Player(x_inicial, y_inicial, 20, 20)
+player2 = Player2(x_inicial, y_inicial, 20, 20)
 while jogo:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
