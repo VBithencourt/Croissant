@@ -66,6 +66,6 @@ class Player2:
         return False
 
 
-x_inicial = (len(mapa_1[0]) * largura_tile) // 2
-y_inicial = (len(mapa_1) * altura_tile) // 2
+x_inicial = 20
+y_inicial = 700
 player2 = Player2(x_inicial + 30, y_inicial, 20, 20)
