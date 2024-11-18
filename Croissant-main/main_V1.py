@@ -44,7 +44,7 @@ while jogo:
         texto = font.render("GAME OVER", True, (255, 0, 0))
         janela.blit(texto, (500, 300))
 
-        texto_mortes_player = font_score.render(f'Mortes Player: {mortes_player}', True, (0, 0, 0))
+        texto_mortes_player = font_score.render(f'Mortes Player 1: {mortes_player}', True, (0, 0, 0))
         texto_mortes_player2 = font_score.render(f'Mortes Player 2: {mortes_player2}', True, (0, 0, 0))
         janela.blit(texto_mortes_player, (500, 400))
         janela.blit(texto_mortes_player2, (500, 440))
