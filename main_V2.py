@@ -2,7 +2,7 @@ import pygame
 from mapa_F1 import *
 from tela_inicial import mostrar_tela_inicial
 from tela_tutorial import mostrar_tutorial
-from musica import *
+#from musica import *
 from player import *
 from player2 import *
 from tela_final_ import *
@@ -38,7 +38,7 @@ while jogo:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_t:  # Ativa/Desativa o tutorial
                 tutorial_ativo = not tutorial_ativo
-                tocar_efeito_sonoro()
+                #tocar_efeito_sonoro()
             if event.key == pygame.K_r and game_over:  # Reinicia o jogo
                 # Restaura o mapa e a posição dos jogadores
                 mapa_2 = [linha[:] for linha in mapa_2]  # Restaura o mapa
@@ -48,29 +48,29 @@ while jogo:
                 som_tocado = False  # Reinicia o som
                 player_chegou_no_4 = False  # Reinicia o status de chegada
                 player2_chegou_no_4 = False  # Reinicia o status de chegada
-                tocar_efeito_sonoro()  # Toca o som novamente
+                #tocar_efeito_sonoro()  # Toca o som novamente
 
-        if event.type == pygame.USEREVENT:
-            efeito_sonoro.stop()
+        #if event.type == pygame.USEREVENT:
+            #efeito_sonoro.stop()
 
-    if game_over:
-        # Se o jogo acabou, mostra a tela de Game Over
-        font = pygame.font.Font(None, 74)
-        texto = font.render("GAME OVER", True, (255, 0, 0))
-        janela.blit(texto, (500, 300))
+        if game_over:
+            # Se o jogo acabou, mostra a tela de Game Over
+            font = pygame.font.Font(None, 74)
+            texto = font.render("GAME OVER", True, (255, 0, 0))
+            janela.blit(texto, (500, 300))
 
-        texto_mortes_player = font_score.render(f'Mortes Player 1: {mortes_player}', True, (0, 0, 0))
-        texto_mortes_player2 = font_score.render(f'Mortes Player 2: {mortes_player2}', True, (0, 0, 0))
-        janela.blit(texto_mortes_player, (500, 480))
-        janela.blit(texto_mortes_player2, (500, 500))
+            texto_mortes_player = font_score.render(f'Mortes Player 1: {mortes_player}', True, (0, 0, 0))
+            texto_mortes_player2 = font_score.render(f'Mortes Player 2: {mortes_player2}', True, (0, 0, 0))
+            janela.blit(texto_mortes_player, (500, 480))
+            janela.blit(texto_mortes_player2, (500, 500))
 
-        font_button = pygame.font.Font(None, 36)
-        button = font_button.render("Pressione R para Reiniciar", True, (0, 0, 0))
-        janela.blit(button, (500, 400))
-    elif tela_final:
+            font_button = pygame.font.Font(None, 36)
+            button = font_button.render("Pressione R para Reiniciar", True, (0, 0, 0))
+            janela.blit(button, (500, 400))
+        elif tela_final:
         # Mostra a tela final e espera o jogador pressionar "Esc" para sair
-        if mostrar_final(janela):
-            jogo = False  # Encerra o jogo se "Esc" for pressionado
+            if mostrar_final(janela):
+                jogo = False  # Encerra o jogo se "Esc" for pressionado
 
         texto_mortes_player = font_score.render(f'Mortes Player 1: {mortes_player}', True, (0, 0, 0))
         texto_mortes_player2 = font_score.render(f'Mortes Player 2: {mortes_player2}', True, (0, 0, 0))
@@ -95,7 +95,7 @@ while jogo:
             mostrar_tutorial(janela)
         else:
             if not som_tocado:
-                tocar_efeito_sonoro()
+                #tocar_efeito_sonoro()
                 som_tocado = True
             for linha in range(len(mapa_2)):
                 for coluna in range(len(mapa_2[linha])):

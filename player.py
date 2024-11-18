@@ -18,7 +18,6 @@ altura_tile = 20
 
 class Player:
     def __init__(self, x, y, width, height):
-
         self.frames = [
             pygame.image.load('Coisinhas/sprite1.png').convert_alpha(),
             pygame.image.load('Coisinhas/sprite2.png').convert_alpha(),
@@ -76,6 +75,26 @@ class Player:
                 self.velocity_y = 0
             elif dy < 0:  # Se o personagem estava subindo
                 self.velocity_y = 0
+    def checa_colisao(self):
+        # Verificando colisões com os blocos sólidos no mapa
+        for linha in range(len(mapa_1)):
+            for coluna in range(len(mapa_1[linha])):
+                if mapa_1[linha][coluna] == 1:  # Blocos sólidos (terreno)
+                    bloco = pygame.Rect(coluna * largura_tile, linha * altura_tile, largura_tile, altura_tile)
+                    if self.rect.colliderect(bloco):
+                        return True
+        return False
+    
+    def checa_colisao2(self):
+        # Verificando colisões com os blocos sólidos no mapa
+        for linha in range(len(mapa_2)):
+            for coluna in range(len(mapa_2[linha])):
+                if mapa_2[linha][coluna] == 1:  # Blocos sólidos (terreno)
+                    bloco = pygame.Rect(coluna * largura_tile, linha * altura_tile, largura_tile, altura_tile)
+                    if self.rect.colliderect(bloco):
+                        return True
+        return False
+    
 
     def fisica(self):
         if not self.on_ground:  # Aplica gravidade somente se não estiver no chão
@@ -83,7 +102,7 @@ class Player:
         self.rect.y += self.velocity_y
 
         # Verificando colisão com o chão
-        if self.checa_colisao():
+        if self.checa_colisao() or self.checa_colisao2():
             self.rect.y -= self.velocity_y  # Reverte o movimento vertical
             self.velocity_y = 0
             self.on_ground = True  # O personagem está tocando o chão
@@ -91,6 +110,7 @@ class Player:
             self.on_ground = False  # O personagem não está tocando o chão
 
         self.update()
+        # Verificando colisão com o chão
 
     def update(self):
         now = pygame.time.get_ticks()
@@ -108,17 +128,6 @@ class Player:
         janela.blit(self.image, (self.rect.x, self.rect.y - self.image.get_height() + self.rect.height))
 
 
-    def checa_colisao(self):
-        # Verificando colisões com os blocos sólidos no mapa
-        for linha in range(len(mapa_1)):
-            for coluna in range(len(mapa_1[linha])):
-                if mapa_1[linha][coluna] == 1:  # Blocos sólidos (terreno)
-                    bloco = pygame.Rect(coluna * largura_tile, linha * altura_tile, largura_tile, altura_tile)
-                    if self.rect.colliderect(bloco):
-                        return True
-        return False
 
 
-x_inicial = 20
-y_inicial = 700
-player = Player(x_inicial, y_inicial, 20, 20)
+    

@@ -77,7 +77,7 @@ class Player2:
         self.rect.y += self.velocity_y
 
         # Verificando colisão com o chão
-        if self.checa_colisao():
+        if self.checa_colisao() or self.checa_colisao2():
             self.rect.y -= self.velocity_y  # Reverte o movimento vertical
             self.velocity_y = 0
             self.on_ground = True  # O personagem está tocando o chão
@@ -111,7 +111,13 @@ class Player2:
                         return True
         return False
 
-
-x_inicial = 20
-y_inicial = 700
-player2 = Player2(x_inicial+30, y_inicial, 20, 20)
+    def checa_colisao2(self):
+        # Verificando colisões com os blocos sólidos no mapa
+        for linha in range(len(mapa_2)):
+            for coluna in range(len(mapa_2[linha])):
+                if mapa_2[linha][coluna] == 1:  # Blocos sólidos (terreno)
+                    bloco = pygame.Rect(coluna * largura_tile, linha * altura_tile, largura_tile, altura_tile)
+                    if self.rect.colliderect(bloco):
+                        return True
+        return False
+    

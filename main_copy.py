@@ -3,7 +3,7 @@ import pygame
 from mapa_F1 import mapa_1
 from tela_inicial import mostrar_tela_inicial
 from tela_tutorial import mostrar_tutorial
-from musica import *
+#from musica import *
 from player import *
 from player2 import *
 from tela_final_ import *
@@ -45,7 +45,7 @@ while jogo:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_t:  # Ativa/Desativa o tutorial
                 tutorial_ativo = not tutorial_ativo
-                tocar_efeito_sonoro()
+                #tocar_efeito_sonoro()
             if event.key == pygame.K_r and game_over:  # Reinicia o jogo
                 # Restaura o mapa e a posição dos jogadores
                 mapa_1 = [linha[:] for linha in mapa_1]  # Restaura o mapa
@@ -55,10 +55,10 @@ while jogo:
                 som_tocado = False  # Reinicia o som
                 player_chegou_no_4 = False  # Reinicia o status de chegada
                 player2_chegou_no_4 = False  # Reinicia o status de chegada
-                tocar_efeito_sonoro()  # Toca o som novamente
+                #tocar_efeito_sonoro()  # Toca o som novamente
 
-        if event.type == pygame.USEREVENT:
-            efeito_sonoro.stop()
+        #if event.type == pygame.USEREVENT:
+            #efeito_sonoro.stop()
 
     if game_over:
         # Se o jogo acabou, mostra a tela de Game Over
@@ -102,7 +102,7 @@ while jogo:
             mostrar_tutorial(janela)
         else:
             if not som_tocado:
-                tocar_efeito_sonoro()
+                #tocar_efeito_sonoro()
                 som_tocado = True
             for linha in range(len(mapa_1)):
                 for coluna in range(len(mapa_1[linha])):
