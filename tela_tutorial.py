@@ -7,8 +7,8 @@ def mostrar_tutorial(janela):
     
     texto_tutorial = [
         "Tutorial do Jogo:",
-        "1. Use as setas para mover.",
-        "2. Pressione 'Espaço' para pular.",
+        "1. Use as setas ou 'A e D' para mover.",
+        "2. Pressione seta para cima ou 'W' para pular.",
         "3. Evite os obstáculos.",
         "4. O objetivo é chegar ao final do mapa e",
         "subir o elevador para a próxima fase.",
