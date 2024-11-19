@@ -33,3 +33,7 @@ O objetivo é simples: chegue ao sexto andar do P2 e conquiste o tão sonhado cr
 ---
 
 Boa sorte na sua jornada, aventureiro(a), e aproveite cada desafio na busca pelo croissant de chocolate!
+
+link da prévia da jogabilidade: https://youtu.be/UbsvgQe_DDs
+
+
